@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracking System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <!-- Logo -->
+            <div class="logo">
+                <img src="images/logo.png" alt="Fitness Track System Logo">
+            </div>
+
+            <!-- Menu Icon (Hamburger) -->
+            <div class="menu-icon" onclick="toggleMenu()">
+                ☰
+            </div>
+
+            <!-- Navigation Menu -->
+            <ul class="nav-links" id="navMenu">
+                <li><a href="#" onclick="showSection('home'); closeMenu()">Home</a></li>
+                <li><a href="#" onclick="showSection('about'); closeMenu()">About</a></li>
+                <li><a href="#" onclick="showSection('dashboard'); closeMenu()">Dashboard</a></li>
+                <li><a href="#" onclick="showSection('workouts'); closeMenu()">Workouts</a></li>
+                <li><a href="#" onclick="showSection('nutrition'); closeMenu()">Nutrition</a></li>
+                <li><a href="#" onclick="showSection('profile'); closeMenu()">Profile</a></li>
+                <li><a href="#" onclick="showSection('contact'); closeMenu()">Contact</a></li>
+                <li><a href="#" onclick="showSection('login'); closeMenu()">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <!-- Home Section -->
+    <section id="home" class="section">
+        <div class="home-container">
+            <!-- Background Video -->
+            <video autoplay muted loop class="home-video">
+            <source src="images/your-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+            <!-- Background Image (Fallback for Video) -->
+            <div class="home-image">
+                <img src="images/fitness.png" alt="Motivational Fitness">
+            </div>
+
+            <!-- Overlay Content -->
+            <div class="home-content">
+                <h2>Track Your Fitness, Stay Healthy!</h2>
+                <p>Monitor your workouts, track your nutrition, and achieve your fitness goals with ease.</p>
+                <button onclick="showSection('signup')">Get Started</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="about-container">
+            <!-- Left Side: Text Content -->
+            <div class="about-text">
+                <h2>About the Fitness Track System</h2>
+                <p>The Fitness Track System is designed to help users monitor their fitness journey by tracking workouts, meals, and progress over time.</p>
+
+                <h3>Why Use This System?</h3>
+                <ul>
+                    <li><i class="bx bx-dumbbell"></i> Log and track workouts with ease</li>
+                    <li><i class="bx bx-pie-chart-alt-2"></i> View progress with detailed analytics</li>
+                    <li><i class="bx bx-heart"></i> Stay motivated with goal-based tracking</li>
+                    <li><i class="bx bx-bell"></i> Get reminders for workouts and meals</li>
+                </ul>
+
+                <h3>How It Works</h3>
+                <ol>
+                    <li>Sign up and create your profile</li>
+                    <li>Log your daily workouts and meals</li>
+                    <li>Track your progress with real-time insights</li>
+                </ol>
+            </div>
+
+            <!-- Right Side: Image -->
+            <div class="about-image">
+                <img src="images/exercise.png" alt="People Exercising">
+            </div>
+        </div>
+
+        <!-- Video Section -->
+        <div class="about-video">
+            <h3>How the System Works</h3>
+            <video controls>
+            <source src="images/about-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        </div>
+    </section>
+
+
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section">
+        <div class="dashboard-container">
+            <!-- User Profile Info -->
+            <div class="user-info">
+                <img id="profile-pic" src="images/default.png" alt="User Profile">
+                <h2>Welcome, <span id="username">User</span>!</h2>
+            </div>
+
+            <!-- Fitness Stats -->
+            <div class="fitness-stats">
+                <div class="stat-box">
+                    <i class="bx bx-walk"></i>
+                    <p>Steps Taken</p>
+                    <h3 id="steps">10,000</h3>
+                </div>
+                <div class="stat-box">
+                    <i class="bx bx-fire"></i>
+                    <p>Calories Burned</p>
+                    <h3 id="calories">500 kcal</h3>
+                </div>
+                <div class="stat-box">
+                    <i class="bx bx-heart"></i>
+                    <p>Heart Rate</p>
+                    <h3 id="heart-rate">72 BPM</h3>
+                </div>
+                <div class="stat-box">
+                    <i class="bx bx-dumbbell"></i>
+                    <p>Workouts Completed</p>
+                    <h3 id="workouts">5</h3>
+                </div>
+            </div>
+
+            <!-- Graphical Reports -->
+            <div class="dashboard-graph">
+                <h3>Your Progress</h3>
+                <canvas id="progressChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workout Section -->
+    <section id="workouts" class="section">
+        <div class="workout-container">
+            <h2>Log Your Workouts</h2>
+            <p>Track your daily exercises and stay on top of your fitness goals.</p>
+
+            <!-- Workout Logging Form -->
+            <div class="workout-form">
+                <h3>Add a Workout</h3>
+                <label for="exercise-name">Exercise Name:</label>
+                <input type="text" id="exercise-name" placeholder="E.g., Running, Push-ups" required>
+
+                <label for="duration">Duration (minutes):</label>
+                <input type="number" id="duration" placeholder="Enter duration" required>
+
+                <label for="intensity">Intensity:</label>
+                <select id="intensity">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+
+                <button onclick="logWorkout()">Add Workout</button>
+            </div>
+
+            <!-- Workout History -->
+            <div class="workout-history">
+                <h3>Your Workout History</h3>
+                <ul id="workout-list"></ul>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- Nutrition Section -->
+    <section id="nutrition" class="section">
+        <div class="nutrition-container">
+            <!-- Section Heading -->
+            <h2>Track Your Meals & Nutrition</h2>
+            <p>Log your meals and monitor your daily calorie intake for a balanced diet.</p>
+
+            <!-- Meal Logging Form -->
+            <div class="meal-form">
+                <h3>Log Your Meal</h3>
+                <label for="meal-type">Meal Type:</label>
+                <select id="meal-type">
+                <option value="breakfast">Breakfast</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
+                <option value="snack">Snack</option>
+            </select>
+
+                <label for="meal-name">Meal Name:</label>
+                <input type="text" id="meal-name" placeholder="E.g., Grilled Chicken Salad">
+
+                <label for="calories">Calories:</label>
+                <input type="number" id="calories" placeholder="Enter calorie count">
+
+                <button onclick="logMeal()">Add Meal</button>
+            </div>
+
+            <!-- Nutrition Summary -->
+            <div class="nutrition-summary">
+                <h3>Daily Nutrition Summary</h3>
+                <p>Total Calories: <span id="total-calories">0</span> kcal</p>
+                <ul id="meal-list"></ul>
+            </div>
+
+            <!-- Meal Illustration -->
+            <div class="nutrition-image">
+                <img src="images/balanced-meal.png" alt="Balanced Meal Illustration">
+            </div>
+
+            <!-- Nutrition Video Tutorial -->
+            <div class="nutrition-video">
+                <h3>Healthy Meal Preparation Guide</h3>
+                <video controls>
+                <source src="images/nutrition-guide.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Profile Section -->
+    <section id="profile" class="section">
+        <div class="profile-container">
+            <!-- Profile Banner (Optional) -->
+            <div class="profile-banner">
+                <img src="images/profile-banner.png" alt="Profile Banner">
+            </div>
+
+            <!-- Profile Info -->
+            <div class="profile-info">
+                <label for="profile-pic-upload">
+                <img id="profile-pic" src="images/default-avatar.png" alt="Profile Picture">
+            </label>
+                <input type="file" id="profile-pic-upload" accept="image/*" style="display: none;">
+                <h2 id="profile-name">John Doe</h2>
+            </div>
+
+            <!-- Edit Profile Form -->
+            <div class="profile-form">
+                <h3>Edit Profile</h3>
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" placeholder="Enter your name" value="John Doe">
+
+                <label for="goal">Fitness Goal:</label>
+                <select id="goal">
+                <option value="weight-loss">Weight Loss</option>
+                <option value="muscle-gain">Muscle Gain</option>
+                <option value="endurance">Endurance Training</option>
+            </select>
+
+                <label for="preferences">Workout Preferences:</label>
+                <input type="text" id="preferences" placeholder="E.g., Cardio, Strength Training">
+
+                <button onclick="saveProfile()">Save Changes</button>
+            </div>
+
+            <!-- Change Password -->
+            <div class="change-password">
+                <h3>Change Password</h3>
+                <label for="current-password">Current Password:</label>
+                <input type="password" id="current-password" placeholder="Enter current password">
+
+                <label for="new-password">New Password:</label>
+                <input type="password" id="new-password" placeholder="Enter new password">
+
+                <label for="confirm-password">Confirm New Password:</label>
+                <input type="password" id="confirm-password" placeholder="Confirm new password">
+
+                <button onclick="changePassword()">Update Password</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="contact-container">
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <h2>Contact Us</h2>
+                <p>Have questions? Reach out to us below.</p>
+
+                <div class="contact-details">
+                    <p><i class="bx bx-envelope"></i> support@fitnesstrack.com</p>
+                    <p><i class="bx bx-phone"></i> +123 456 7890</p>
+                    <p><i class="bx bx-map"></i> 123 Fitness Street, Wellness City</p>
+                </div>
+
+                <!-- Social Media Links -->
+                <div class="contact-social">
+                    <a href="#" target="_blank"><i class="bx bxl-facebook"></i></a>
+                    <a href="#" target="_blank"><i class="bx bxl-twitter"></i></a>
+                    <a href="#" target="_blank"><i class="bx bxl-instagram"></i></a>
+                    <a href="#" target="_blank"><i class="bx bxl-linkedin"></i></a>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h3>Send a Message</h3>
+                <form id="contactForm">
+                    <label for="contact-name">Your Name:</label>
+                    <input type="text" id="contact-name" placeholder="Enter your name" required>
+
+                    <label for="contact-email">Your Email:</label>
+                    <input type="email" id="contact-email" placeholder="Enter your email" required>
+
+                    <label for="contact-message">Message:</label>
+                    <textarea id="contact-message" placeholder="Write your message" required></textarea>
+
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+
+            <!-- Contact Illustration -->
+            <div class="contact-image">
+                <img src="images/contact.png" alt="Customer Support Illustration">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Login/Signup Section -->
+    <section id="login" class="section">
+        <div class="auth-container">
+            <!-- Illustration -->
+            <div class="auth-image">
+                <img src="images/login.png" alt="Login Illustration">
+            </div>
+
+            <!-- Login Form -->
+            <div class="auth-form">
+                <h2>Login to Your Account</h2>
+                <form id="loginForm">
+                    <label for="login-email"><i class="bx bx-envelope"></i> Email:</label>
+                    <input type="email" id="login-email" placeholder="Enter your email" required>
+
+                    <label for="login-password"><i class="bx bx-lock"></i> Password:</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" required>
+
+                    <button type="submit">Login</button>
+                </form>
+                <p>Don't have an account? <a href="#" onclick="showSection('signup')">Sign up here</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signup Section -->
+    <section id="signup" class="section">
+        <div class="auth-container">
+            <div class="auth-image">
+                <img src="images/signup.png" alt="Signup Illustration">
+            </div>
+
+            <!-- Signup Form -->
+            <div class="auth-form">
+                <h2>Create an Account</h2>
+                <form id="signupForm">
+                    <label for="signup-name"><i class="bx bx-user"></i> Full Name:</label>
+                    <input type="text" id="signup-name" placeholder="Enter your full name" required>
+
+                    <label for="signup-email"><i class="bx bx-envelope"></i> Email:</label>
+                    <input type="email" id="signup-email" placeholder="Enter your email" required>
+
+                    <label for="signup-password"><i class="bx bx-lock"></i> Password:</label>
+                    <input type="password" id="signup-password" placeholder="Enter your password" required>
+
+                    <button type="submit">Sign Up</button>
+                </form>
+                <p>Already have an account? <a href="#" onclick="showSection('login')">Login here</a></p>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="images/logo.png" alt="Fitness Track Logo">
+            </div>
+
+            <div class="footer-links">
+                <a href="#" onclick="showSection('home')">Home</a>
+                <a href="#" onclick="showSection('about')">About</a>
+                <a href="#" onclick="showSection('contact')">Contact</a>
+                <a href="#" onclick="showSection('login')">Login</a>
+            </div>
+
+            <div class="footer-contact">
+                <p>Email: support@fitnesstrack.com</p>
+                <p>Phone: +123 456 7890</p>
+            </div>
+
+            <!-- Social Media Icons (Using Boxicons) -->
+            <div class="footer-social">
+                <a href="#" target="_blank"><i class="bx bxl-facebook"></i></a>
+                <a href="#" target="_blank"><i class="bx bxl-twitter"></i></a>
+                <a href="#" target="_blank"><i class="bx bxl-instagram"></i></a>
+                <a href="#" target="_blank"><i class="bx bxl-linkedin"></i></a>
+            </div>
+
+            <p class="footer-copy">&copy; 2024 Fitness Track. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>
